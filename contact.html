@@ -1,0 +1,118 @@
+<!doctype html>
+<html ng-app='myApp'>
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keyword" content="">
+    <title>Contact List</title>
+    <link rel="stylesheet" href="content/css/bootstrap.min.css">
+	<script src="content/js/jquery.min.js"></script>
+	<script src="content/js/angular.min.js"></script>
+	<script src="contact.js"></script>
+	<script src="content/js/bootstrap.min.js"></script>
+	 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css">
+	<style>
+	.btn:hover{
+		background-color: #ff2c2c;
+		color: #fff;
+		border-color: #ff2c2c;
+	}
+	.btn:focus{
+		color: #333;
+		text-decoration: none;
+	}
+	.fdset {
+    padding: 10px;
+    border: 1px solid #999;
+    position: relative;
+    margin: 10px 0 2px 0;
+    display: block;
+	}
+	.fdsetview {
+    width: auto;
+    position: absolute;
+    top: -12px;
+    padding: 0 2px;
+    font-size: 16px;
+    font-family: 'Roboto Condensed',sans-serif;
+    color: #000;
+    line-height: 20px;
+    box-shadow: inset 0 -10px 0 #fff;
+    left: 10px;
+}
+.form-group {
+    margin-bottom: 5px !important;
+}
+th {
+    text-align: center !important;
+}
+	</style>
+  </head>
+<body class="full-width">
+<div ng-controller="ContactController">
+	<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" >
+	<section>
+		<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" style="margin: 40px 0px;">
+
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 row fdset">						
+							
+
+							<form name="ContactForm">
+							<div class="fdsetview">Contact Details</div>
+                            <div class="form-group col-lg-12">
+                                <label class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">First Name</label>								
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" ng-model="newcontact.firstName" class="form-control input-sm" maxlength="20" required  />
+                                </div>          
+                            </div>
+
+						    <div class="form-group col-lg-12">
+                                <label class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Last Name<span class="reqvalidation"></span></label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" tabindex="2" ng-model="newcontact.lastName" class="form-control input-sm" maxlength="20" />
+                                </div>          
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label class="col-lg-6 col-md-6 col-sm-6 col-xs-12 control-label">Phone<span class="reqvalidation"></span></label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" tabindex="3" ng-model="newcontact.phone" class="form-control input-sm" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="12"  required/>
+                                </div>          
+                            </div>
+                        
+                            <div class="form-group col-lg-12">
+								<input type="hidden" ng-model="newcontact.id" /></td>
+                                <button ng-click="saveContact()" class="btn btn-Blue btn-sm"><i class="fa fa-address-book" aria-hidden="true"></i>&nbsp;Save&nbsp;</button>
+								<span style="color:green;font-weight:bold">{{lblmsg}}</span>
+                            </div>
+							</form>
+                        </div>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" style="text-align: center;">
+			<table border="1" class="table-bordered table-condensed table-striped" style="margin: 10px;">
+			<thead>
+				<tr><th>No.</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tr ng-repeat="contact in contacts">
+				<td>{{ $index+1 }}</td>
+				<td>{{ contact.firstName }}</td>
+				<td>{{ contact.lastName }}</td>
+				<td>{{ contact.phone }}</td>
+				<td>
+					<button ng-click="edit(contact.id)"  class="btn btn-Blue btn-sm"><i class="fas fa-edit"></i>&nbsp;Edit&nbsp;</button>
+					<button ng-click="delete(contact.id)"  class="btn btn-Blue btn-sm"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Delete&nbsp;</button>					
+				</td>
+			 </tr>
+			</table>
+		</div>
+	</section>		
+	</div>
+</div>
+</body>
+</html>
